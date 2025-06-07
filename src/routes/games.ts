@@ -4,6 +4,7 @@ import { games } from '../data/games';
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response) => {
+  
   console.log('Fetching all games');
   res.json(games);
 });

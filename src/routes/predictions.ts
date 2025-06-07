@@ -3,12 +3,23 @@ import { userData } from '../data/user';
 
 // Prediction interface
 export interface Prediction {
-    id: string;
-    userId: string;
+    id?: string;
+    userId?: string;
     gameId: string;
-    pick: string; // 'home' or 'away'
-    timestamp: string;
+    pick?: string; // 'home' or 'away'
+    timestamp?: string;
+    amount?: number;
+    result?: 'win' | 'loss' | 'pending' | undefined;
+    payout?: number;
 }
+
+// export interface Prediction {
+//     "gameId": string;
+//     "pick": string,
+//     "amount": number;
+//     "result": 'win' | 'loss'
+//     "payout": number
+// }
 
 // In-memory predictions array
 export const predictions: Prediction[] = [];
@@ -17,13 +28,16 @@ const router = express.Router();
 
 // POST /api/predictions
 // Submit a new prediction
+// Currently we are not checking if game is over or not. can be taken as future enhancement.
 router.post('/', (req: Request, res: Response) => {
-    const { userId, gameId, pick } = req.body;
+    const { gameId, pick } = req.body;
 
-    if (!userId || !gameId || !pick) {
+    if (!gameId || !pick) {
         res.status(400).json({ message: 'Missing required fields' });
         return;
     }
+
+    const userId = userData.id;
 
     // Prevent duplicate prediction by same user for same game
     const exists = predictions.find(
@@ -33,7 +47,7 @@ router.post('/', (req: Request, res: Response) => {
         res
             .status(400)
             .json({ message: 'Prediction already exists for this user and game.' });
-            return;
+        return;
     }
 
     const prediction: Prediction = {
@@ -41,6 +55,8 @@ router.post('/', (req: Request, res: Response) => {
         userId,
         gameId,
         pick,
+        amount: 100,
+        result: 'pending',
         timestamp: new Date().toISOString(),
     };
 
@@ -59,13 +75,13 @@ router.get('/user/:userId', (req: Request, res: Response) => {
 // GET /api/predictions/game/:gameId
 // (Optional) Get all predictions for a specific game
 router.get('/game/:gameId', (req: Request, res: Response) => {
-    
+
     const gameId = req.params.gameId;
     console.log(`<<<<<<<< predictions request for  ${gameId}`)
     console.log(`<<<<<< predictions = ${JSON.stringify(predictions)}`);
     const userId = userData.id;
     const gamePredictions = predictions.filter(p => p.gameId === gameId && p.userId === userId);
-    
+
     let filteredPredictions = gamePredictions;
     console.log(`<<<<<< filtered predictions = ${JSON.stringify(filteredPredictions)}`);
 

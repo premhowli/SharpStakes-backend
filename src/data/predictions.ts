@@ -1,9 +1,3 @@
-export interface Prediction {
-    id: string;        // prediction id (optional)
-    userId: string;
-    gameId: string;
-    predictedWinner: string; // e.g., 'home' or 'away'
-    timestamp: string;
-}
+import { Prediction } from "../routes/predictions";
 
 export const predictions: Prediction[] = [];
