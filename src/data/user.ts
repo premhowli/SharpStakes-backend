@@ -1,22 +1,26 @@
-export const userData = {
+// import { Prediction } from "./predictions";
+
+import { Prediction } from "../routes/predictions";
+
+interface State {
+    wins: number;
+    losses: number;
+    pending: number;
+}
+interface UserData {
+    id: string;
+    username: string;
+    balance: number;
+    predictions?: Prediction[];
+    stats: State
+}
+
+export const userData: UserData = {
 
     'id': 'usr123',
     'username': 'sportsfan42',
     'balance': 1000,
     'predictions': [
-        {
-            'gameId': 'gm1003',
-            'pick': 'MIA',
-            'amount': 100,
-            'result': 'win',
-            'payout': 190,
-        },
-        {
-            'gameId': 'gm1002',
-            'pick': 'DAL',
-            'amount': 50,
-            'result': 'pending',
-        },
     ],
     'stats': {
         'wins': 7,

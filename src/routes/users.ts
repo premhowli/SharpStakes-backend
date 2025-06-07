@@ -1,10 +1,17 @@
 import express, { Request, Response } from 'express';
 import { userData } from '../data/user';
+import { predictions } from './predictions';
 
 const router = express.Router();
 
 router.get('/details', (req: Request, res: Response) => {
   console.log('Fetching all games');
+  let WinAmount
+  const prediction = predictions.filter(pred=>{
+    return pred.userId === userData.id
+  })
+  console.log(`<<<<<< updating prediction ${JSON.stringify(prediction)}`);
+  userData.predictions = prediction
   res.json(userData);
 });
 
