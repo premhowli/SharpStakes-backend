@@ -1,14 +1,11 @@
 # SharpStakes-backend
 
----
-
 ## Features
 
 - RESTful API for games, users, and predictions
 - Simple in-memory or file-based storage
 - Modular, type-safe controllers
 
----
 
 ## Prerequisites
 
@@ -16,7 +13,6 @@
 - **npm** or **yarn**
 - (Optional) [Postman](https://www.postman.com/) or [curl](https://curl.se/) for API testing
 
----
 
 ## Getting Started
 
