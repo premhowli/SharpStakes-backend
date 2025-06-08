@@ -36,14 +36,18 @@ npm run dev
 yarn dev
 ```
 
-### Simulation Logic:
-Currently Every game runs for 1 minute. 
-Whenever a user wins it simply return 2 * buy in amount(100) as payout.
-utility.ts has all the simulation logic
-
 ## Congratulations! :tada:
 
 You've successfully run the backend server running at port 4000. :partying_face:
 
+## Details & disclaimers
+
+### Ai Usage at coding
+Took help of copilot using chat gpt 4.1 
+
+### Simulation Logic:
+Currently Every game runs for 1 minute. 
+Whenever a user wins it simply return 2 * buy in amount(100) as payout.
+utility.ts has all the simulation logic
 
 
