@@ -4,13 +4,13 @@ import { userData } from './data/user';
 import { predictions, Prediction } from './routes/predictions';
 
 export const startGame = () => {
-    games.forEach(game => {
+    games.forEach((game, index) => {
         if (game.status === 'inProgress') {
             game.startTime = new Date().toISOString();
             game.status = 'inProgress';
         }
         else if (game.status === 'scheduled') {
-            const start = new Date(Date.now() + START_TIME);
+            const start = new Date(Date.now() + (index + 1 ) * START_TIME);
             game.startTime = start.toISOString();
         }
     });
@@ -57,11 +57,9 @@ export const updateGameClocks = () => {
     console.log(`Updating game clocks`);
     const now = Date.now();
     games.forEach(game => {
-
-
         if (game.status === 'scheduled' && game.startTime) {
             const elapsed = now - new Date(game.startTime).getTime();
-            if (elapsed > 0) {
+            if (elapsed >= 0) {
                 game.status = 'inProgress'
                 game.clock = '0.00'
                 game.period = '1st'
