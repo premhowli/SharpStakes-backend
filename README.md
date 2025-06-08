@@ -50,4 +50,10 @@ Currently Every game runs for 1 minute.
 Whenever a user wins it simply return 2 * buy in amount(100) as payout.
 utility.ts has all the simulation logic
 
+### Technical Gotcha!
+
+ - if you see all game has ended. Just restart the server. 
+ - If you have predicted games, and want to try a fresh. change gameIds in src/data/games.ts. Since old id's will be fetched from storage, it will already show predicted.
+Alternatively install a fresh app. and all things work again.
+
 
